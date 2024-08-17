@@ -28,6 +28,5 @@ app.use(session({
 app.use('/', fileRoutes);
 
 
-app.listen(process.env.PORT, () => {
-    log(`Listening at port ${process.env.PORT}`)
-})
+// Export the app for Vercel
+module.exports = app;
