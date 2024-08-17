@@ -27,13 +27,7 @@ app.use(session({
 // Use the routes
 app.use('/', fileRoutes);
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
 
-
-
-// Export the app for Vercel
-module.exports = app;
+app.listen(process.env.PORT, () => {
+    log(`Listening at port ${process.env.PORT}`)
+})
