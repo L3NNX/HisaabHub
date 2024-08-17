@@ -28,4 +28,5 @@ app.use(session({
 app.use('/', fileRoutes);
 
 
-app.listen(3000);
+// Export the app for Vercel
+module.exports = app;
