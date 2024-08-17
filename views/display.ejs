@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <main class="w-full h-screen ">
+
+        <!-- Nav bar -->
+        <nav class="flex px-10 justify-between py-5">
+            <a href="/" class="text-2xl tracking-tight font-['Helvetica']">Khaatabook</a>
+            <div class="navlinks flex gap-5">
+                <a href="/" class="tracking-tight">Home</a>
+                <a href="/create" class="tracking-tight">Create New Hisaab</a>
+                <a href="/logout" class="tracking-tight">Logout</a>
+            </div>
+        </nav>
+
+        <div class="px-10 hisaabs mt-10">
+            <div class="w-1/5 h-[12rem] px-3 py-2 bg-slate-200 outline-none text-md rounded-md flex flex-col relative">
+
+                <h2 class="text-xl font-medium tracking-tight mb-2">
+                    <!-- <%= filename.split(".")[0]%> -->
+                    <%= hisaab.title %>
+                </h2>
+    
+                <p name="content" class="font medium text-xl mb-4">
+                    <%= hisaab.content %>
+                </p>
+    
+                <a class="px-5 w-fit py-2 bg-blue-300 text-lg rounded-md absolute bottom-2" href="/edit/<%= hisaab._id%>">Edit karlo</a>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+
+</html>
