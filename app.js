@@ -21,7 +21,7 @@ app.use(session({
     secret: 'your-secret-key', 
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } 
+    cookie: { secure: process.env.NODE_ENV === 'production' } 
 }));
 
 // Use the routes
