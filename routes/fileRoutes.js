@@ -16,8 +16,9 @@ router.get('/', (req, res) => {
 router.get('/hisaabs', isAuthenticated, async (req, res) => {
     try {
         const hisaabs = await Hisaab.find({ userId: req.session.userId }); 
-
-        res.render('hisaabs', { hisaabs });
+        const userId = req.session.userId; 
+        const user = await User.findById(userId);
+        res.render('hisaabs', { hisaabs ,user });
     } catch (err) {
         res.status(500).send(err);
     }
