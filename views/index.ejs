@@ -12,14 +12,25 @@
 
 <body>
     <main class="w-full h-screen">
-        <nav class="flex px-10 justify-between py-5">
+        <nav class="flex items-center justify-between px-10 py-5 ">
             <a href="/" class="text-2xl tracking-tight font-['Helvetica']">Khaatabook</a>
-            <div class="navlinks flex gap-5">
+            <div class="block lg:hidden">
+                <button id="menu-toggle" class="text-gray-500 focus:outline-none">
+                    <i class="ri-menu-line"></i>
+                </button>
+            </div>
+            <div id="nav-links" class="hidden lg:flex gap-5">
                 <a href="/" class="tracking-tight">Home</a>
-                <a href="/hisaabs" class="tracking-tight">Enter Dashboard</a>
+                <a href="/create" class="tracking-tight">Create New Hisaab</a>
                 <a href="/login" class="tracking-tight">Login</a>
             </div>
         </nav>
+
+        <div id="mobile-menu" class="hidden lg:hidden flex flex-col items-start px-10 pt-5">
+            <a href="/" class="py-2">Home</a>
+            <a href="/create" class="py-2">Create New Hisaab</a>
+            <a href="/login" class="py-2">Login</a>
+        </div>
 
         <div class="hero w-full h-[calc(100vh-80px)] flex flex-col md:flex-row p-4 md:p-4 overflow-hidden">
             <div class="w-full md:w-1/2 flex flex-col items-start justify-center px-4 mb-4 md:mb-0">

@@ -12,14 +12,28 @@
 
 <body>
     <main class="w-full h-screen  ">
-        <nav class="flex px-10 justify-between py-5">
+        <nav class="flex items-center justify-between px-10 py-5 ">
             <a href="/" class="text-2xl tracking-tight font-['Helvetica']">Khaatabook</a>
-            <div class="navlinks flex gap-5">
+            <div class="block lg:hidden">
+                <button id="menu-toggle" class="text-gray-500 focus:outline-none">
+                    <i class="ri-menu-line"></i>
+                </button>
+            </div>
+            <div id="nav-links" class="hidden lg:flex gap-5">
                 <a href="/" class="tracking-tight">Home</a>
-                <a href="/create" class="tracking-tight">Create Hisaabs</a>
+                
                 <a href="/logout" class="tracking-tight">Logout</a>
+                <% if (user) { %>
+                    <span class="tracking-tight">Welcome, <%= user.username %>!</span>
+                <% } %>
             </div>
         </nav>
+
+        <div id="mobile-menu" class="hidden lg:hidden flex flex-col items-start px-10 pt-5">
+            <a href="/" class="py-2">Home</a>
+            
+            <a href="/logout" class="py-2">Logout</a>
+        </div>
 
         <div class="px-10 hisaabs">
             <h3 class="capitalize text-2xl mb-5 mt-10 tracking-tight">
@@ -55,6 +69,16 @@
 
         </div>
     </main>
+
+    <script>
+        // JavaScript to toggle mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
