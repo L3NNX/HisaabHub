@@ -101,8 +101,7 @@ router.post('/login', async (req, res) => {
         // Find the user by username
         const user = await User.findOne({ username });
         if (!user) {
-            //log results
-            console.log('Signup:', { username, password });
+            return res.redirect('/login');
         }
 
         // Compare the provided password with the stored hashed password
