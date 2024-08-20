@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const session = require('express-session');
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
