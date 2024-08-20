@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo');
 require('dotenv').config();
+const express = require('express');
+const app = express();
+const path = require('path');
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
