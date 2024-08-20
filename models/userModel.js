@@ -1,21 +1,4 @@
 const mongoose = require("mongoose")
-const MongoStore = require('connect-mongo');
-require('dotenv').config();
-const express = require('express');
-const app = express();
-const path = require('path');
-const session = require('express-session');
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://Khaatabook:1234@khaatabook.dokzs.mongodb.net/?retryWrites=true&w=majority&appName=Khaatabook',
-        ttl: 14 * 24 * 60 * 60, // Session expiration time (in seconds)
-        autoRemove: 'disabled'
-    })
-}));
 
 mongoose.connect('mongodb+srv://Khaatabook:1234@khaatabook.dokzs.mongodb.net/?retryWrites=true&w=majority&appName=Khaatabook')
     .then(() => console.log('MongoDB connected successfully'))
