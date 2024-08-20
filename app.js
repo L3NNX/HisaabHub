@@ -5,7 +5,7 @@ const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 require('dotenv').config();
-// const userModel = require('./models/userModel');
+const userModel = require('./models/userModel');
 
 // Import the routes
 const fileRoutes = require('./routes/fileRoutes');
