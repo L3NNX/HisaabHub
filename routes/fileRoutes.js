@@ -118,7 +118,7 @@ router.post('/login', async (req, res) => {
         //log results
         console.log('Login:', { username, password });
 
-        res.redirect('/hisaabs');
+        res.redirect('/show');
     } catch (err) {
         res.status(500).send('Server error');
     }
