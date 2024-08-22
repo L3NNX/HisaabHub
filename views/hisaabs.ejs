@@ -20,12 +20,12 @@
                 </button>
             </div>
             <div id="nav-links" class="hidden lg:flex gap-5">
-                <a href="/" class="tracking-tight">Home</a>
-                
-                <a href="/logout" class="tracking-tight">Logout</a>
                 <% if (user) { %>
                     <span class="tracking-tight">Welcome, <%= user.username %>!</span>
                 <% } %>
+                <a href="/create" class="tracking-tight">Create</a>
+                
+                <a href="/logout" class="tracking-tight">Logout</a>
             </div>
         </nav>
 
