@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MemoryStore = require('memorystore')(session)
 require('dotenv').config();
 const userModel = require('./models/userModel');
 
 // Import the routes
 const fileRoutes = require('./routes/fileRoutes');
-const connectDB = require('./config/db'); 
+const connectDB = require('./config/db');
 // Connect to MongoDB
 connectDB();
 
@@ -22,13 +22,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'default-secret-key', 
+    secret: process.env.SESSION_SECRET || 'default-secret-key',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI,
+    store: new MemoryStore({
+        checkPeriod: 86400000
     }),
-    cookie: { secure: process.env.NODE_ENV === 'production' } 
+    cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 // Use the routes
