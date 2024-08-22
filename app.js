@@ -28,7 +28,7 @@ app.use(session({
     store: new MemoryStore({
         checkPeriod: 86400000
     }),
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+    // cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 // Use the routes
