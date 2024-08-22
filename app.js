@@ -9,13 +9,15 @@ const userModel = require('./models/userModel');
 
 // Import the routes
 const fileRoutes = require('./routes/fileRoutes');
+const connectDB = require('./config/db'); 
+// Connect to MongoDB
+connectDB();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Session configuration
 app.use(session({
