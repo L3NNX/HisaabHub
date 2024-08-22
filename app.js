@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 const userModel = require('./models/userModel');
 
@@ -24,6 +25,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'default-secret-key', 
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+    }),
     cookie: { secure: process.env.NODE_ENV === 'production' } 
 }));
 
