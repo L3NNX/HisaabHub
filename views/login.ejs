@@ -83,6 +83,15 @@
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+        
+       // Remove flash messages after 3 seconds
+       setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.popup');
+            flashMessages.forEach((message) => {
+                message.remove();
+            });
+        }, 3000);
+
     </script>
     
 </body>
