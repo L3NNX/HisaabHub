@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 const fs = require('fs');
+require('dotenv').config();
+const path = require('path');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session)
-require('dotenv').config();
 const userModel = require('./models/userModel');
+var flash = require('connect-flash');
 
 // Import the routes
 const fileRoutes = require('./routes/fileRoutes');
@@ -30,6 +31,9 @@ app.use(session({
     }),
     // cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
+
+//Flash middleware
+app.use(flash());
 
 // Use the routes
 app.use('/', fileRoutes);

@@ -90,7 +90,10 @@ router.get('/show/:id', isAuthenticated, async (req, res) => {
 
 // Render login page
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login',{
+        success_msg: req.flash('success_msg'),
+        err_msg: req.flash('err_msg')
+    });
 });
 
 //Login a user
@@ -101,13 +104,15 @@ router.post('/login', async (req, res) => {
         // Find the user by username
         const user = await User.findOne({ username });
         if (!user) {
+            req.flash('err_msg', 'Invalid username or password');
             return res.redirect('/login');
         }
 
         // Compare the provided password with the stored hashed password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).send('Invalid username or password');
+            req.flash('err_msg', 'Invalid username or password');
+            return res.redirect('/login');
         }
 
         // Store user information in session
@@ -117,15 +122,19 @@ router.post('/login', async (req, res) => {
 
         //log results
         console.log('Login:', { username, password });
-
+        req.flash('success_msg', 'Login successful! Welcome back.');
         res.redirect('/hisaabs');
     } catch (err) {
+        req.flash('err_msg', 'Server error');
         res.status(500).send('Server error');
     }
 });
 
 router.get('/signup', (req, res) => {
-    res.render('signup');
+    res.render('signup',{
+        success_msg: req.flash('success_msg'),
+        err_msg: req.flash('err_msg')
+    });
 });
 
 router.post('/signup', async (req, res) => {
@@ -135,7 +144,9 @@ router.post('/signup', async (req, res) => {
         // Check if the user already exists
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res.status(400).send('Username already exists');
+            // return res.status(400).send('Username already exists');
+            req.flash('err_msg', 'Username already exists');
+            return res.redirect('/signup');
         }
 
         // Hash the password
@@ -147,10 +158,11 @@ router.post('/signup', async (req, res) => {
 
         //log results
         console.log('Signup:', { username, password });
-
-        res.redirect('/login');
+        req.flash('success_msg', 'Signup Successful!');
+        return res.redirect('/login');
     } catch (err) {
-        res.status(500).send('Server error');
+        req.flash('err_msg', 'Something went wrong');
+        return res.status(500);
     }
 });
 

@@ -12,7 +12,21 @@
 </head>
 
 <body>
-    <main class="w-screen">
+    <main class="w-screen">        
+        <!-- Flash Messages -->
+        <div class="text-center">
+            <% if (success_msg.length > 0) { %>
+                <div class="popup absolute left-1/2 top-4 animate-pulse text-xs md:text-sm text-center -translate-x-1/2 px-4 py-2  bg-green-500 rounded-md">
+                    <%= success_msg %>
+                </div>
+            <% } %>
+            <% if (err_msg.length > 0) { %>
+                <div class="popup absolute left-1/2 top-4 animate-pulse text-xs md:text-sm text-center -translate-x-1/2 px-4 py-2  bg-red-500 rounded-md">
+                    <%= err_msg %>
+                </div>
+            <% } %>
+        </div >
+        
 
         <!-- Nav bar -->
         <nav class="flex items-center justify-between px-8 md:px-5 lg:px-10 py-5 ">

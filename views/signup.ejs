@@ -12,7 +12,20 @@
 
 <body>
     <main class="w-screen">
-
+        <!-- Flash Messages -->
+        <div class="text-center">
+            <% if (success_msg.length > 0) { %>
+                <div class="popup absolute left-1/2 top-4 animate-pulse text-xs md:text-sm text-center -translate-x-1/2 px-4 py-2  bg-green-500 rounded-md">
+                    <%= success_msg %>
+                </div>
+            <% } %>
+            <% if (err_msg.length > 0) { %>
+                <div class="popup absolute left-1/2 top-4 animate-pulse text-xs md:text-sm text-center -translate-x-1/2 px-4 py-2  bg-red-500 rounded-md">
+                    <%= err_msg %>
+                </div>
+            <% } %>
+        </div >
+        
         <!-- Nav bar -->
         <nav class="flex items-center justify-between px-8 md:px-5 lg:px-10 py-5 ">
             <a href="/" class="text-2xl tracking-tight font-['Helvetica']">Khaatabook</a>
@@ -33,8 +46,9 @@
         </div>
         <!-- Nav bar -->
 
+
         <div class="px-10 flex flex-col justify-center items-center hisaabs absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <h1 class=" mb-5 tracking-tight text-2xl font-medium capitalize">Please Login to continue</h1>
+            <h1 class=" mb-5 tracking-tight text-2xl font-medium capitalize">Please Signup to continue</h1>
 
             <form action="/signup" method="post" class="flex flex-col gap-4">
                 <!-- <label for="username" class="sr-only">Username</label> -->
@@ -50,7 +64,7 @@
                     class="w-6/6 px-3 py-2 bg-slate-200 outline-none text-md rounded-md">
 
                 <button type="submit" class=" w-1/2 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                    Login
+                    Signup
                 </button>
             </form>
         </div>
