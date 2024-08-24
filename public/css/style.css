@@ -23,6 +23,6 @@
 html,body{
     height: 100%;
     background-image: conic-gradient(at 100% 50%, rgb(199, 210, 254), rgb(71, 85, 105), rgb(199, 210, 254));
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100% 400%;
+    background-position: 0% 50%;
 }
