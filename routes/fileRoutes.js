@@ -18,7 +18,8 @@ router.get('/hisaabs', isAuthenticated, async (req, res) => {
         const hisaabs = await Hisaab.find({ userId: req.session.userId });
         const userId = req.session.userId;
         const user = await User.findById(userId);
-        res.render('hisaabs', { hisaabs, user });
+        const success_msg = req.session.success_msg;
+        res.render('hisaabs', { hisaabs, user, success_msg });
     } catch (err) {
         res.status(500).send(err);
     }
@@ -121,9 +122,11 @@ router.post('/login', async (req, res) => {
         req.session.userId = user._id;
 
         //log results
-        console.log('Login:', { username, password });
+        // console.log('Login:', { username, password });
+        // console.log(req.flash('success_msg'))
         req.flash('success_msg', 'Login successful! Welcome back.');
-        res.redirect('/hisaabs');
+        req.session.success_msg = req.flash('success_msg')
+        return res.redirect('/hisaabs');
     } catch (err) {
         req.flash('err_msg', 'Server error');
         res.status(500).send('Server error');
