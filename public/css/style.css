@@ -13,9 +13,17 @@
     box-sizing: border-box;
 }
 
-html,body{
+/* html,body{
     height: 100%;
     background-image: conic-gradient(at 100% 50%, rgb(199, 210, 254), rgb(71, 85, 105), rgb(199, 210, 254));
     background-size: 100% 400%;
     background-position: 0% 50%;
+} */
+html, body {
+  min-height: 100%;
+  background-image: conic-gradient(at 100% 50%, #c7d2fe, #475569, #c7d2fe);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
 }

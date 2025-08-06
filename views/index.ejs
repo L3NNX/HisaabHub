@@ -4,56 +4,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khaatabook</title>
+    <title>Khaatabook - Digital Ledger for Modern Business</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-    <main>
-        <nav class="flex items-center justify-between px-8 md:px-5 lg:px-10 py-5 ">
-            <a href="/" class="text-2xl tracking-tight font-['Helvetica']">Khaatabook</a>
-            <div class="block lg:hidden">
-                <button id="menu-toggle" class="text-gray-500 focus:outline-none">
-                    <i class="ri-menu-line"></i>
-                </button>
-            </div>
-            <div id="nav-links" class="hidden lg:flex gap-5">
-                <a href="/" class="tracking-tight">Home</a>
-                <a href="/create" class="tracking-tight">Create New Hisaab</a>
-            </div>
-        </nav>
+<body class="overflow-x-hidden min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/10 backdrop-blur-md z-50 border-b border-white/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-white tracking-tight font-['Poppins']">
+                        Khaatabook
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-white/90 hover:text-white px-3 py-2 text-sm font-medium transition-colors tracking-tight">Home</a>
+                        <a href="#features" class="text-white/90 hover:text-white px-3 py-2 text-sm font-medium transition-colors tracking-tight">Features</a>
+                        <a href="#about" class="text-white/90 hover:text-white px-3 py-2 text-sm font-medium transition-colors tracking-tight">About</a>
+                        <a href="#contact" class="text-white/90 hover:text-white px-3 py-2 text-sm font-medium transition-colors tracking-tight">Contact</a>
+                    </div>
+                </div>
 
-        <div id="mobile-menu" class="hidden lg:hidden flex flex-col items-start px-10 pt-5">
-            <a href="/" class="py-2">Home</a>
-            <a href="/create" class="py-2">Create New Hisaab</a>
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/login" class="text-white/90 hover:text-white px-4 py-2 text-sm font-medium transition-colors tracking-tight">
+                        Login
+                    </a>
+                    <a href="/signup" class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-white/30 transform hover:scale-105 transition-all duration-200 tracking-tight">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-white/80 focus:outline-none">
+                        <i class="ri-menu-line text-xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="hero w-full flex-1 flex flex-col md:flex-row p-4 md:p-4 overflow-hidden">
-            <div class="w-full md:w-1/2 flex flex-col items-start justify-center px-4 md:mb-0">
-                <h1 class="text-3xl font-bold text-gray-800 mb-6 ">Welcome to Khatabook</h1>
-                <p class="text-gray-600 md:text-lg lg:text-xl  text-justify">
-                    Khatabook is a digital ledger application designed to help users manage their daily financial transactions effortlessly. It allows individuals and small business owners to record their income and expenses, track payments, and maintain a clear overview of their financial status. Khatabook simplifies the bookkeeping process, making it accessible to everyone.
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/10 backdrop-blur-md border-t border-white/20">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-white/90 hover:text-white font-medium tracking-tight">Home</a>
+                <a href="#features" class="block px-3 py-2 text-white/90 hover:text-white font-medium tracking-tight">Features</a>
+                <a href="#about" class="block px-3 py-2 text-white/90 hover:text-white font-medium tracking-tight">About</a>
+                <a href="#contact" class="block px-3 py-2 text-white/90 hover:text-white font-medium tracking-tight">Contact</a>
+                <div class="pt-4 pb-2 border-t border-white/20">
+                    <a href="/login" class="block px-3 py-2 text-white/90 hover:text-white font-medium tracking-tight">Login</a>
+                    <a href="/signup" class="block mx-3 mt-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-center font-medium tracking-tight">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 tracking-tight">
+                        Simplify Your
+                        <span class="text-blue-200">
+                            Financial
+                        </span>
+                        Management
+                    </h1>
+                    <p class="text-xl text-white/80 mb-8 leading-relaxed tracking-tight">
+                        Transform the way you handle your finances with Khaatabook - the modern digital ledger designed for individuals and businesses who value simplicity and efficiency.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="/signup" class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-semibold hover:bg-white/30 transform hover:scale-105 transition-all duration-200 text-center tracking-tight">
+                            Start Free Today
+                        </a>
+                        <a href="#features" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:border-white hover:bg-white/10 transition-all duration-200 text-center tracking-tight">
+                            Learn More
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-6 text-sm text-white/70">
+                        <div class="flex items-center">
+                            <i class="ri-check-line text-green-300 mr-2"></i>
+                            No credit card required
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-check-line text-green-300 mr-2"></i>
+                            Free forever plan
+                        </div>
+                    </div>
+                </div>
+                <div class="animate-fade-in lg:order-last">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-white/10 rounded-3xl transform rotate-6 backdrop-blur-sm"></div>
+                        <img src="../images/finance-financial-performance-concept-illustration.png" 
+                             alt="Financial Management Illustration" 
+                             class="relative w-full h-auto rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white/5 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                    Everything You Need to Manage Your Finances
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto tracking-tight">
+                    Powerful features designed to make financial management effortless and intuitive
                 </p>
             </div>
-            <div class="w-full md:w-1/2 flex items-center justify-center mt-8 md:mt-0">
-                <img class="w-full h-auto rounded-lg shadow-md object-cover" src="../images/finance-financial-performance-concept-illustration.png" alt="Finance Illustration">
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-file-list-3-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Digital Ledger</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        Keep track of all your financial transactions in one secure, organized digital ledger that's accessible anywhere, anytime.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-shield-check-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Secure & Private</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        Your financial data is protected with enterprise-grade security. Only you have access to your information.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-smartphone-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Mobile Friendly</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        Access your financial records on any device. Our responsive design works perfectly on mobile, tablet, and desktop.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-edit-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Easy Management</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        Create, edit, and delete financial entries with just a few clicks. Simple and intuitive interface for everyone.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-time-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Real-time Updates</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        All your changes are saved instantly. Never lose your data with automatic synchronization across all devices.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="group p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="ri-user-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">User Authentication</h3>
+                    <p class="text-white/80 leading-relaxed tracking-tight">
+                        Secure login system ensures that your financial data remains private and accessible only to you.
+                    </p>
+                </div>
             </div>
-        </div>  
-    </main>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white/5 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                        Why Choose Khaatabook?
+                    </h2>
+                    <p class="text-lg text-white/80 mb-8 leading-relaxed tracking-tight">
+                        Khaatabook is more than just a digital ledger - it's your financial companion designed to simplify the way you manage money. Whether you're a small business owner, freelancer, or individual looking to track personal finances, we've got you covered.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1 mr-4">
+                                <i class="ri-check-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2 tracking-tight">Simple & Intuitive</h4>
+                                <p class="text-white/80 tracking-tight">No complex features or confusing interfaces. Just straightforward financial management.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1 mr-4">
+                                <i class="ri-check-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2 tracking-tight">Always Accessible</h4>
+                                <p class="text-white/80 tracking-tight">Cloud-based solution means your data is always available when you need it.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-1 mr-4">
+                                <i class="ri-check-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2 tracking-tight">Completely Free</h4>
+                                <p class="text-white/80 tracking-tight">Start managing your finances today without any upfront costs or hidden fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="absolute inset-0 bg-white/10 rounded-3xl transform -rotate-6 backdrop-blur-sm"></div>
+                    <div class="relative bg-white/10 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <i class="ri-bar-chart-line text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4 tracking-tight">Ready to Get Started?</h3>
+                            <p class="text-white/80 mb-6 tracking-tight">Join thousands of users who trust Khaatabook for their financial management needs.</p>
+                            <a href="/signup" class="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-full font-semibold hover:bg-white/30 transform hover:scale-105 transition-all duration-200 inline-block tracking-tight">
+                                Create Free Account
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white/5 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+                    Get in Touch
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto tracking-tight">
+                    Have questions or need support? We're here to help you succeed with your financial management.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-mail-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Email Support</h3>
+                    <p class="text-white/80 mb-4 tracking-tight">Get help via email within 24 hours</p>
+                    <a href="mailto:support@khaatabook.com" class="text-blue-200 hover:text-white font-medium tracking-tight">
+                        support@khaatabook.com
+                    </a>
+                </div>
+
+                <div class="text-center p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-question-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Help Center</h3>
+                    <p class="text-white/80 mb-4 tracking-tight">Find answers to common questions</p>
+                    <a href="#" class="text-blue-200 hover:text-white font-medium tracking-tight">
+                        Browse FAQ
+                    </a>
+                </div>
+
+                <div class="text-center p-8 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-chat-3-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-4 tracking-tight">Live Chat</h3>
+                    <p class="text-white/80 mb-4 tracking-tight">Chat with our support team</p>
+                    <a href="#" class="text-blue-200 hover:text-white font-medium tracking-tight">
+                        Start Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/20 backdrop-blur-sm text-white py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <a href="/" class="text-2xl font-bold text-white mb-4 inline-block tracking-tight font-['Poppins']">
+                        Khaatabook
+                    </a>
+                    <p class="text-white/70 mb-6 max-w-md tracking-tight">
+                        Simplifying financial management for individuals and businesses worldwide. Your trusted digital ledger solution.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 tracking-tight">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#features" class="text-white/70 hover:text-white transition-colors tracking-tight">Features</a></li>
+                        <li><a href="#about" class="text-white/70 hover:text-white transition-colors tracking-tight">About</a></li>
+                        <li><a href="/login" class="text-white/70 hover:text-white transition-colors tracking-tight">Login</a></li>
+                        <li><a href="/signup" class="text-white/70 hover:text-white transition-colors tracking-tight">Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 tracking-tight">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#contact" class="text-white/70 hover:text-white transition-colors tracking-tight">Contact</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors tracking-tight">Help Center</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors tracking-tight">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors tracking-tight">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-12 pt-8 text-center">
+                <p class="text-white/70 tracking-tight">
+                    © 2025 Khaatabook. All rights reserved. Made with ❤️ for better financial management.
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // JavaScript to toggle mobile menu
-        const menuToggle = document.getElementById('menu-toggle');
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        menuToggle.addEventListener('click', () => {
+        mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/20');
+                nav.classList.remove('bg-white/10');
+            } else {
+                nav.classList.add('bg-white/10');
+                nav.classList.remove('bg-white/20');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
 
 </html>
-    
